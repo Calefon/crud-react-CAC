@@ -7,6 +7,16 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const mySwal = withReactContent(Swal);
 
+const delSwal = Swal.mixin({
+    title:'Estás Seguro/a?',
+    text: "No podés revertir esta Acción!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, deseo borrarlo!"
+});
+
 const DeleteButton = ({onClick}) => { return (
     <button onClick={onClick} className="btn btn-danger">
         <i className="fa-solid fa-trash"></i>
@@ -72,17 +82,7 @@ const Show = ()=>{
     }
 
     const confirmDelete = (id)=>{
-        Swal.fire(
-            {
-                title:'Estás Seguro/a?',
-                text: "No podés revertir esta Acción!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, deseo borrarlo!"
-            }
-        ).then(
+        delSwal.fire().then(
             (result)=>{
                 if(result.isConfirmed){
                     deleteBook(id);
