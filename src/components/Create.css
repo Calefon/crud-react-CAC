@@ -1,0 +1,11 @@
+div label {
+    width: fit-content;
+    margin-left: 5px;
+}
+form {
+    width: 206px;
+}
+
+div#formCont {
+    width: fit-content;
+}

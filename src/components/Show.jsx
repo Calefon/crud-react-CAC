@@ -2,6 +2,7 @@ import{useState,useEffect} from "react";
 import {Link} from "react-router-dom";
 import{collection,getDocs,deleteDoc,doc} from "firebase/firestore";
 import {db} from "../firebaseConfig/firebase.js";
+import "./Show.css"
 
 import Swal from "sweetalert2"; 
 import withReactContent from "sweetalert2-react-content";
@@ -18,16 +19,20 @@ const delSwal = Swal.mixin({
 });
 
 const DeleteButton = ({onClick}) => { return (
-    <button onClick={onClick} className="btn btn-danger">
-        <i className="fa-solid fa-trash"></i>
+    <div className="container tableButton d-flex flex-row justify-content-center">
+    <button onClick={onClick} className="btn btn-danger btn-sm">
+        <i className="fa-solid fa-trash fa-sm"></i>
     </button>
+    </div>
     )};
 
 const EditButton = ({productId}) => {
     return(
-    <Link to={`/edit/${productId}`} className="btn btn-light">
-        <i className="fa-solid fa-pencil"></i>
+    <div className="container tableButton d-flex flex-row justify-content-center">
+    <Link to={`/edit/${productId}`} className="btn btn-light btn-sm">
+        <i className="fa-solid fa-pencil fa-sm"></i>
     </Link>
+    </div>
     );}
 
 const AwesomeProductsTable = ({productsArray,deleteFunction}) => {
@@ -49,9 +54,11 @@ const AwesomeProductsTable = ({productsArray,deleteFunction}) => {
                             <td>{book.title}</td>
                             <td>{book.authors}</td>
                             <td>{book.stock}</td>
-                            <td>
+                            <td className="d-flex flex-row justify-content-center">
+                                <div className="container d-flex flex-row tBtnContainer">
                                 <EditButton productId={book.id}/>
                                 <DeleteButton onClick={()=>deleteFunction(book.id)}/>
+                                </div>
                             </td>
                         </tr>);
                     }
