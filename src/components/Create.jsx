@@ -1,8 +1,6 @@
-import{useState,useEffect} from "react";
 import {Link} from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import {db} from "../firebaseConfig/firebase.js";
-
 import "./Create.css"
 
 const productsDB = collection(db, "products");
@@ -25,9 +23,11 @@ const Create = ()=>{
     }
 
     return(
+
         <div className="container m-5 p-3 d-flex flex-column border" id="formCont">
         <FormularioCarga onSubmit={handleSubmit}/>
         </div>
+        
     );
 
 }

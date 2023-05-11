@@ -107,10 +107,7 @@ const Show = ()=>{
         <>
         <div className="container">
             <div className="col">
-                <div className="row">
-                    <div className="d-grid gap-2">
-                        <Link to="/create" className="btn btn-secondary mt-2 mb-2">CREAR</Link>
-                    </div>
+                <div className="row mt-5">
                     <AwesomeProductsTable productsArray={books} deleteFunction={confirmDelete}/>
                 </div>
             </div>
