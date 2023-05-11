@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">     
+    <div className="App min-vh-100 w-100 d-flex flex-column justify-content-start align-items-center">     
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<><NavBar/><Show/></>}/>

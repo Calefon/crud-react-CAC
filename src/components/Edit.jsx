@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { db } from "../firebaseConfig/firebase";
 import { useEffect,useState } from "react";
 
+import Swal from "sweetalert2"; 
+import withReactContent from "sweetalert2-react-content";
+const mySwal = withReactContent(Swal);
 
 
 const Edit = () => {
@@ -38,9 +41,14 @@ const Edit = () => {
         // Or you can work with it as a plain object:
         const bookNewData = Object.fromEntries(formData.entries());
 
-        await updateDoc(bookData.bookRef, bookNewData);
+        Swal.fire({title:"Aplicando cambios",didOpen: ()=>{Swal.showLoading()}});
 
-        e.target.reset();
+        await updateDoc(bookData.bookRef, bookNewData).then(()=>{
+            Swal.close();
+            Swal.fire("Genial!","El libro ha sido actualizado","success");
+            e.target.reset();
+        });
+   
     }
 
     return(
@@ -53,18 +61,18 @@ const Edit = () => {
 
 const FormularioEdicion = ({onSubmit,bookData,onChange})=>{
     return (
-        <form method="post" onSubmit={onSubmit} className="d-flex flex-column align-items-start">
-            <div className="form-group d-flex flex-column align-content-start mb-2">
+        <form method="post" onSubmit={onSubmit} className="d-flex flex-column align-items-center">
+            <div className="form-group w-75 d-flex flex-column align-content-start mb-2">
                 <label htmlFor="titleInput">Title</label>
                 <input type="text" onChange={onChange} value={bookData.title} className="form-control" name="title" id="titleInput"/>
             </div>
-            <div className="form-group d-flex flex-column align-content-start mb-2">
+            <div className="form-group d-flex w-75 flex-column align-content-start mb-2">
                 <label htmlFor="authorsInput">Authors</label>
                 <input type="text" onChange={onChange} value={bookData.authors} className="form-control" id="authorsInput" name="authors"/>
             </div>
-            <div className="form-group d-flex flex-column align-content-start mb-4">
+            <div className="form-group d-flex w-75 flex-column align-content-start mb-4">
                 <label htmlFor="stockInput">Stock</label>
-                <input type="number" onChange={onChange} value={bookData.stock} className="form-control" id="stockInput" name="stock"/>
+                <input type="number" onChange={onChange} value={bookData.stock} className="form-control w-25" id="stockInput" name="stock"/>
             </div>
             <button type="submit" className="btn btn-success">Confirmar cambios</button>
       </form>
